@@ -1,0 +1,44 @@
+/* Blue & White Theme Applied */
+/* Vidyashine Academy - Component Styles */
+
+/* Scrollbar styling */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Animations */
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Navigation smooth transitions */
+.nav-scrolled {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(10, 22, 40, 0.1) !important;
+}
+
+/* Modal and Overlay */
+.modal-overlay {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Feature cards hover effects */
+.protocol-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .scrollbar-hide {
+    overflow-x: auto;
+  }
+}
