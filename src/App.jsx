@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { BrowserRouter, Routes, Route, Link, useLocation, useParams, Navigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -433,7 +434,7 @@ const Navbar = ({ onOpenModal }) => {
   return (
     <nav
       ref={navRef}
-      className="sticky top-0 left-0 w-full z-40 px-6 md:px-12 py-4 flex flex-col bg-[#6050DC] shadow-[0_4px_12px_rgba(0,0,0,0.15)] text-white transition-all duration-300"
+      className="sticky top-0 left-0 w-full z-40 px-6 md:px-12 py-4 flex flex-col bg-[#2563eb] shadow-[0_4px_12px_rgba(0,0,0,0.15)] text-white transition-all duration-300"
     >
       <div className="w-full max-w-7xl mx-auto flex justify-between items-center">
         <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-3 group relative shrink-0">
@@ -453,7 +454,7 @@ const Navbar = ({ onOpenModal }) => {
                   <span>CBSE • NEET • JEE • OLYMPIAD</span>
                 </div>
               </div>
-              <div className="font-heading font-bold text-lg md:text-xl tracking-tighter uppercase leading-none group-hover:text-black transition-colors">
+              <div className="font-heading font-bold text-lg md:text-xl tracking-tighter uppercase leading-none group-hover:text-blue-200 transition-colors">
                 Vidyashine
               </div>
             </div>
@@ -474,11 +475,11 @@ const Navbar = ({ onOpenModal }) => {
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 0 1 0 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z" /></svg>
             <span>Our App</span>
           </a>
-          <button onClick={onOpenModal} className="hidden md:flex magnetic-button bg-accent text-white px-6 py-2 rounded-full text-sm font-medium">
+          <button onClick={onOpenModal} className="hidden md:flex magnetic-button bg-white text-[#2563eb] px-6 py-2 rounded-full text-sm font-bold shadow-md">
             <span>Start free trial</span>
           </button>
           <button
-            className="lg:hidden p-2 hover:text-accent transition-colors"
+            className="lg:hidden p-2 hover:text-blue-200 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -489,7 +490,7 @@ const Navbar = ({ onOpenModal }) => {
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
         <div className="lg:hidden w-full pt-6 pb-4 mt-4 border-t border-white/20 flex flex-col items-center gap-6 animate-fade-in">
-          <button onClick={() => { setMobileMenuOpen(false); onOpenModal(); }} className="bg-white text-[#6050DC] px-8 py-3.5 rounded-full text-[15px] font-heading font-bold w-full max-w-[280px] text-center shadow-lg hover:scale-105 transition-transform">
+          <button onClick={() => { setMobileMenuOpen(false); onOpenModal(); }} className="bg-white text-[#2563eb] px-8 py-3.5 rounded-full text-[15px] font-heading font-bold w-full max-w-[280px] text-center shadow-lg hover:scale-105 transition-transform">
             Start free trial
           </button>
           
@@ -579,7 +580,8 @@ const Hero = ({ onOpenModal, onOpenCancelModal }) => {
           {/* Left — Main heading */}
           <div className="flex-1 min-w-0">
             <h1 className="font-drama italic text-white text-5xl md:text-8xl lg:text-9xl leading-none tracking-tight mb-6">
-              Where Brilliance Begins<span className="text-accent">.</span>
+              <span className="sr-only">Best Coaching Institute in Noida for Classes 6-12, JEE, NEET, NDA, CUET — Vidyashine Academy</span>
+              <span aria-hidden="true">Where Brilliance Begins<span className="text-accent">.</span></span>
             </h1>
             <p className="font-data text-sm md:text-base text-white/80 tracking-widest uppercase max-w-xl">
               From strong foundations to competitive triumph — expert coaching for Classes VI–XII, JEE, NEET, NDA & CUET under one roof.
@@ -1271,10 +1273,10 @@ const CompetitiveExams = () => {
 
         <div className="scroll-reveal grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { tag: "Engineering", title: "JEE", desc: "Joint Entrance Examination", offers: "Advanced problem-solving modules, speed optimization, and rigorous testing on complex Science & Math applications.", quote: "\"Engineering the minds that will engineer the future.\"" },
-            { tag: "Medical", title: "NEET", desc: "National Eligibility Entrance Test", offers: "High-retention biological drilling, concept-mapping, and calculation-heavy physics/chemistry strategies.", quote: "\"Precision in preparation for precision in practice.\"" },
-            { tag: "Defense", title: "NDA", desc: "National Defence Academy", offers: "Specialized mathematical conditioning, comprehensive general ability coverage, and tactical aptitude training.", quote: "\"Forging discipline into academic dominance.\"" },
-            { tag: "University", title: "CUET", desc: "Common University Entrance Test", offers: "Strategic domain-subject mastery, general aptitude benchmarks, and premier university admission counseling.", quote: "\"Your gateway to India's most prestigious campuses.\"" }
+            { tag: "Engineering", title: "JEE", desc: "Joint Entrance Examination", offers: "Advanced problem-solving modules, speed optimization, and rigorous testing on complex Science & Math applications.", quote: "\"Engineering the minds that will engineer the future.\"", link: "/jee-coaching-noida" },
+            { tag: "Medical", title: "NEET", desc: "National Eligibility Entrance Test", offers: "High-retention biological drilling, concept-mapping, and calculation-heavy physics/chemistry strategies.", quote: "\"Precision in preparation for precision in practice.\"", link: "/neet-coaching-noida" },
+            { tag: "Defense", title: "NDA", desc: "National Defence Academy", offers: "Specialized mathematical conditioning, comprehensive general ability coverage, and tactical aptitude training.", quote: "\"Forging discipline into academic dominance.\"", link: "/nda-coaching-noida" },
+            { tag: "University", title: "CUET", desc: "Common University Entrance Test", offers: "Strategic domain-subject mastery, general aptitude benchmarks, and premier university admission counseling.", quote: "\"Your gateway to India's most prestigious campuses.\"", link: "/cuet-coaching-noida" }
           ].map((exam, idx) => (
             <div key={idx} className="bg-white/5 backdrop-blur-md border border-white/10 hover:border-accent/40 rounded-[2rem] p-8 transition-all duration-300 hover:-translate-y-2 group relative overflow-hidden flex flex-col items-start shadow-sm hover:shadow-[0_10px_30px_rgba(37,99,235,0.25)] h-full">
               <div className="font-data text-xs text-accent font-bold tracking-widest uppercase mb-4 px-3 py-1 bg-accent/10 rounded-full border border-accent/20">
@@ -1291,9 +1293,12 @@ const CompetitiveExams = () => {
               </div>
 
               <div className="mt-auto border-t border-white/10 pt-5 w-full">
-                <span className="font-heading italic text-sm text-accent/80 opacity-80 group-hover:opacity-100 transition-opacity block leading-snug">
+                <span className="font-heading italic text-sm text-accent/80 opacity-80 group-hover:opacity-100 transition-opacity block leading-snug mb-4">
                   {exam.quote}
                 </span>
+                <Link to={exam.link} className="inline-flex items-center gap-2 font-data text-xs text-accent font-bold uppercase tracking-widest hover:text-white transition-colors">
+                  Learn More <ArrowRight className="w-3 h-3" />
+                </Link>
               </div>
             </div>
           ))}
@@ -1885,6 +1890,19 @@ const Contact = () => {
               </div>
             </div>
           </div>
+
+          {/* Connect With Us card */}
+          <div className="scroll-reveal flex-1 flex flex-col justify-center gap-6 bg-[#F0F4FF] border border-primary/5 rounded-[2rem] p-8 md:p-12 items-center text-center">
+            <h3 className="font-heading font-bold text-2xl text-primary border-b border-primary/10 pb-4 w-full text-center">Connect With Us</h3>
+            <div className="flex items-center gap-6">
+              <a href="https://www.facebook.com/vidyashineacademy/" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-[#1877F2]/10 text-[#1877F2] flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-colors duration-300 shadow-sm" aria-label="Visit Vidyashine Academy on Facebook">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+              </a>
+              <a href="https://www.instagram.com/vidyashineacademy/" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-[#E1306C]/10 text-[#E1306C] flex items-center justify-center hover:bg-[#E1306C] hover:text-white transition-colors duration-300 shadow-sm" aria-label="Visit Vidyashine Academy on Instagram">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1912,8 +1930,9 @@ const AboutUs = () => {
               {!imageError ? (
                 <img
                   src="/Tutor.jpg"
-                  alt="Abhishek Rana - Director & Maths HOD"
+                  alt="Mr. Abhishek Rana - Director and Maths HOD at Vidyashine Academy Noida, MSc B-Tech B.Ed with 12+ years teaching experience"
                   className="w-full h-full object-cover"
+                  loading="lazy"
                   onError={() => setImageError(true)}
                   style={{ display: 'block' }}
                 />
@@ -1953,8 +1972,9 @@ const AboutUs = () => {
               <div className="h-72 md:h-96 overflow-hidden bg-gradient-to-b from-[#E0E7FF] to-[#F0F4FF] flex items-center justify-center">
                 <img
                   src="/0.jpg"
-                  alt="Achievement 1"
+                  alt="Vidyashine Academy Noida student achievement and result highlights"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
                   style={{ display: 'block' }}
                 />
               </div>
@@ -1964,8 +1984,9 @@ const AboutUs = () => {
               <div className="h-72 md:h-96 overflow-hidden bg-gradient-to-b from-[#E0E7FF] to-[#F0F4FF] flex items-center justify-center">
                 <img
                   src="/1.jpg"
-                  alt="Achievement 2"
+                  alt="Vidyashine Academy Noida coaching results and board exam toppers"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
                   style={{ display: 'block' }}
                 />
               </div>
@@ -1975,8 +1996,9 @@ const AboutUs = () => {
               <div className="h-72 md:h-96 overflow-hidden bg-gradient-to-b from-[#E0E7FF] to-[#F0F4FF] flex items-center justify-center">
                 <img
                   src="/2.jpg"
-                  alt="Achievement 3"
+                  alt="Vidyashine Academy Noida competitive exam preparation success stories"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
                   style={{ display: 'block' }}
                 />
               </div>
@@ -2282,21 +2304,21 @@ const TopAchievers = ({ onOpenModal }) => {
         <div className="achiever-reveal w-full lg:w-7/12 grid grid-cols-2 gap-4 md:gap-6 relative">
           <div className="flex flex-col gap-4 md:gap-6 mt-8 md:mt-16">
             <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl group relative bg-[#DBEAFE]">
-              <img src="/7.png" alt="Top Achiever 1" className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]" />
+              <img src="/7.png" alt="Vidyashine Academy Science Topper - Board exam top scorer from Noida coaching" loading="lazy" className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
             </div>
             <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl group relative bg-[#DBEAFE]">
-              <img src="/9.jpeg" alt="Top Achiever 2" className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]" />
+              <img src="/9.jpeg" alt="Vidyashine Academy Physics Topper - Top rank in competitive exams Noida" loading="lazy" className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
             </div>
           </div>
           <div className="flex flex-col gap-4 md:gap-6">
             <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl group relative bg-[#DBEAFE]">
-              <img src="/8.png" alt="Top Achiever 3" className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]" />
+              <img src="/8.png" alt="Vidyashine Academy Maths Topper - Academic excellence in Noida coaching institute" loading="lazy" className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
             </div>
             <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl group relative bg-[#DBEAFE]">
-              <img src="/10.png" alt="Top Achiever 4" className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]" />
+              <img src="/10.png" alt="Vidyashine Academy Class 10 Topper - CBSE board results from Noida coaching" loading="lazy" className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
             </div>
           </div>
@@ -2424,8 +2446,28 @@ const InteractiveBackground = () => {
   return <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-none" />;
 };
 
+const WhatsAppButton = () => (
+  <a
+    href="https://wa.me/919999906710?text=Hi%20Vidyashine%20Academy%2C%20I%20want%20to%20know%20about%20coaching%20classes"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform"
+    aria-label="Chat with Vidyashine Academy on WhatsApp"
+    id="whatsapp-cta"
+  >
+    <svg className="w-7 h-7 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+);
+
 const HomePage = ({ onOpenModal, onOpenCancelModal }) => (
   <>
+    <Helmet>
+      <title>Vidyashine Academy — Best Coaching in Noida for Classes 6-12 | JEE, NEET, NDA, CUET</title>
+      <meta name="description" content="Vidyashine Academy offers expert coaching for Classes 6-12, JEE, NEET, NDA & CUET in Noida Sector 52, 34 & 61. Free demo classes, small batches, proven results. Enroll now!" />
+      <link rel="canonical" href="https://vidyashine.com/" />
+    </Helmet>
     <InteractiveBackground />
     <HeroSlider />
     <Hero onOpenModal={onOpenModal} onOpenCancelModal={onOpenCancelModal} />
@@ -2441,6 +2483,11 @@ const HomePage = ({ onOpenModal, onOpenCancelModal }) => (
 
 const CurriculumPage = ({ onOpenModal, onOpenCancelModal }) => (
   <>
+    <Helmet>
+      <title>Our Curriculum — Classes 6-12 CBSE Coaching | Vidyashine Academy Noida</title>
+      <meta name="description" content="Explore Vidyashine Academy's CBSE-aligned curriculum for Classes 6-12. NCERT-aligned syllabus, weekly diagnostic tests, JEE/NEET foundation, and structured learning paths in Noida." />
+      <link rel="canonical" href="https://vidyashine.com/curriculum" />
+    </Helmet>
     <Curriculum />
     <CompetitiveExams />
     <CTA onOpenModal={onOpenModal} onOpenCancelModal={onOpenCancelModal} />
@@ -2449,29 +2496,69 @@ const CurriculumPage = ({ onOpenModal, onOpenCancelModal }) => (
 
 const AdmissionsPage = ({ onOpenModal, onOpenCancelModal }) => (
   <>
+    <Helmet>
+      <title>Admissions & Fees 2026-27 — Vidyashine Academy Noida</title>
+      <meta name="description" content="Check Vidyashine Academy coaching fees for Classes 6-12, JEE, NEET, NDA & CUET in Noida. Scholarship test available with up to 90% fee waiver. Limited seats — enroll today!" />
+      <link rel="canonical" href="https://vidyashine.com/admissions" />
+    </Helmet>
     <AdmissionsPricing onOpenModal={onOpenModal} onOpenCancelModal={onOpenCancelModal} />
     <CTA onOpenModal={onOpenModal} onOpenCancelModal={onOpenCancelModal} />
   </>
 );
 
 const ContactPage = () => (
-  <Contact />
+  <>
+    <Helmet>
+      <title>Contact Vidyashine Academy — Coaching in Noida Sector 52, 34, 61</title>
+      <meta name="description" content="Get in touch with Vidyashine Academy. Visit us at Sector 52, 34 or 61, Noida. Call 9999906710, WhatsApp, or book a free demo class online." />
+      <link rel="canonical" href="https://vidyashine.com/contact" />
+    </Helmet>
+    <Contact />
+  </>
 );
 
 const AboutUsPage = () => (
-  <AboutUs />
+  <>
+    <Helmet>
+      <title>About Us — Vidyashine Academy | Expert Coaching Faculty in Noida</title>
+      <meta name="description" content="Meet the expert faculty at Vidyashine Academy Noida. Led by Mr. Abhishek Rana (MSc, B-Tech, B.Ed, 12+ years experience). Proven track record, 10000+ students transformed." />
+      <link rel="canonical" href="https://vidyashine.com/about-us" />
+    </Helmet>
+    <AboutUs />
+  </>
 );
 
 const ReachUsPage = () => (
-  <ReachUs />
+  <>
+    <Helmet>
+      <title>Our Locations — Vidyashine Academy Noida | Sector 52, 34, 61</title>
+      <meta name="description" content="Find Vidyashine Academy near you. 3 locations in Noida — Sector 52 (B-1), Sector 34 (A-24) & Sector 61. Google Maps directions and contact details." />
+      <link rel="canonical" href="https://vidyashine.com/reach-us" />
+    </Helmet>
+    <ReachUs />
+  </>
 );
 
 const PrivacyPolicyPage = () => (
-  <PrivacyPolicy />
+  <>
+    <Helmet>
+      <title>Privacy Policy — Vidyashine Academy</title>
+      <meta name="description" content="Read Vidyashine Academy's privacy policy. Learn how we collect, use, and protect your personal information." />
+      <link rel="canonical" href="https://vidyashine.com/privacy-policy" />
+    </Helmet>
+    <PrivacyPolicy />
+  </>
 );
 
 const TermsOfServicePage = () => (
-  <TermsOfService />
+  <>
+    <Helmet>
+      <title>Terms of Service — Vidyashine Academy</title>
+      <meta name="description" content="Read Vidyashine Academy's terms of service. Understand your rights and obligations when using our website and services." />
+      <link rel="canonical" href="https://vidyashine.com/terms-of-service" />
+    </Helmet>
+    <TermsOfService />
+  </>
 );
 
 // --- SAFE BLOG IMAGE COMPONENT (replaces innerHTML XSS pattern) ---
@@ -2499,6 +2586,10 @@ const BlogImage = ({ src, alt, className, fallbackSize = 48 }) => {
 // --- 404 NOT FOUND PAGE ---
 const NotFoundPage = () => (
   <section className="w-full min-h-screen bg-[#eef2f7] flex flex-col items-center justify-center px-6 relative z-10 text-primary">
+    <Helmet>
+      <title>Page Not Found — Vidyashine Academy</title>
+      <meta name="robots" content="noindex" />
+    </Helmet>
     <h1 className="font-heading font-bold text-8xl md:text-9xl text-accent mb-6">404</h1>
     <h2 className="font-heading font-bold text-2xl md:text-3xl text-primary mb-4">Page Not Found</h2>
     <p className="font-data text-primary/60 text-sm mb-10 max-w-md text-center">
@@ -2548,6 +2639,11 @@ const BlogPage = () => {
 
   return (
     <div ref={containerRef} className="min-h-screen pt-16 pb-24 relative">
+      <Helmet>
+        <title>Education Blog — Tips, News & Exam Strategies | Vidyashine Academy Noida</title>
+        <meta name="description" content="Read expert education tips, exam strategies, and coaching insights from Vidyashine Academy Noida. JEE, NEET, board preparation guides and more." />
+        <link rel="canonical" href="https://vidyashine.com/blog" />
+      </Helmet>
       {/* Fixed Aurora Glow (Hardware Accelerated) */}
       <div className="fixed top-1/4 left-1/4 w-1/2 h-[500px] bg-accent/10 blur-[100px] rounded-full pointer-events-none transform-gpu opacity-30"></div>
 
@@ -2661,6 +2757,11 @@ const BlogArticle = () => {
 
   return (
     <article ref={containerRef} className="min-h-screen pt-16 pb-24 relative">
+      <Helmet>
+        <title>{blog.title} | Vidyashine Academy Noida</title>
+        <meta name="description" content={blog.description.slice(0, 155)} />
+        <link rel="canonical" href={`https://vidyashine.com/blog/${blog.link}`} />
+      </Helmet>
       {/* Fixed Aurora Background */}
       <div className="fixed top-1/4 left-1/4 w-1/2 h-[500px] bg-accent/5 blur-[100px] rounded-full pointer-events-none transform-gpu opacity-30 z-0"></div>
 
@@ -2746,7 +2847,7 @@ const ToppersPage = () => {
     { year: '2021-22', label: '2021-22 Batch' },
   ];
 
-  const subjectCategories = [
+  const defaultCategories = [
     { key: 'science', label: 'Science Topper', icon: '🔬' },
     { key: 'commerce', label: 'Commerce Topper', icon: '📊' },
     { key: 'physics', label: 'Physics Topper', icon: '⚛️' },
@@ -2756,44 +2857,41 @@ const ToppersPage = () => {
     { key: 'accounts', label: 'Accounts Topper', icon: '📒' },
   ];
 
+  const categoriesClass10and12 = [
+    { key: 'class10', label: 'Class X Topper', icon: '🎓' },
+    { key: 'class12', label: 'Class XII Topper', icon: '🏆' },
+  ];
+
+  const categories2024 = [
+    { key: 'class10and12', label: 'Toppers Of CBSE Class 10 and 12', icon: '🌟' }
+  ];
+
+  let currentCategories = defaultCategories;
+  if (activeTab === '2024-25') currentCategories = categories2024;
+  else if (activeTab === '2023-24' || activeTab === '2022-23') currentCategories = categoriesClass10and12;
+
   // Subject-wise images mapping per year
   // Add images to each subject array as they become available
   const toppersData = {
     '2025-26': {
-      science: ['/7.png', '/8.png'],
+      science: [],
       commerce: [],
-      physics: ['/9.jpeg'],
-      maths: ['/10.png'],
+      physics: [],
+      maths: [],
       chemistry: [],
       economics: [],
       accounts: [],
     },
     '2024-25': {
-      science: [],
-      commerce: [],
-      physics: [],
-      maths: [],
-      chemistry: [],
-      economics: [],
-      accounts: [],
+      class10and12: ['/2024-25/Class10and12,2024-25.png'],
     },
     '2023-24': {
-      science: [],
-      commerce: [],
-      physics: [],
-      maths: [],
-      chemistry: [],
-      economics: [],
-      accounts: [],
+      class10: ['/2023-24/class10,2023-24.png'],
+      class12: ['/2023-24/class12,2023-24.png'],
     },
     '2022-23': {
-      science: [],
-      commerce: [],
-      physics: [],
-      maths: [],
-      chemistry: [],
-      economics: [],
-      accounts: [],
+      class10: ['/2022-23/class10,2022-23.png'],
+      class12: ['/2022-23/class12,2022-23.png'],
     },
     '2021-22': {
       science: ['/2021-22 Topper/Science Topper 2021-22.png'],
@@ -2810,6 +2908,11 @@ const ToppersPage = () => {
 
   return (
     <div ref={pageRef} className="w-full min-h-screen pt-16 pb-24 px-6 md:px-16 bg-white">
+      <Helmet>
+        <title>Our Results & Toppers — Vidyashine Academy Noida</title>
+        <meta name="description" content="See Vidyashine Academy's proven results. Our toppers consistently score 95%+ in boards and crack JEE, NEET & NDA. View our Hall of Fame." />
+        <link rel="canonical" href="https://vidyashine.com/toppers" />
+      </Helmet>
       <div className="max-w-7xl mx-auto">
         <h1 className="toppers-reveal font-heading font-black text-5xl md:text-7xl text-primary text-center mb-6 tracking-tight">
           Meet Our <span className="text-accent">Champions</span>
@@ -2836,7 +2939,7 @@ const ToppersPage = () => {
 
         {/* Subject-wise Sections */}
         <div className="space-y-16">
-          {subjectCategories.map((subject) => {
+          {currentCategories.map((subject) => {
             const images = currentData[subject.key] || [];
             return (
               <div key={subject.key} className="w-full">
@@ -2878,6 +2981,243 @@ const ToppersPage = () => {
   );
 };
 
+// --- EXAM LANDING PAGES (SEO Pillar Pages) ---
+
+const ExamPageLayout = ({ examData, onOpenModal }) => {
+  const sectionRef = useRef(null);
+  useScrollReveal(sectionRef, '.exam-reveal', { y: 50, stagger: 0.15 });
+
+  return (
+    <>
+      <Helmet>
+        <title>{examData.title}</title>
+        <meta name="description" content={examData.metaDescription} />
+        <link rel="canonical" href={`https://vidyashine.com${examData.path}`} />
+      </Helmet>
+      <div ref={sectionRef} className="w-full min-h-screen pt-16 pb-24 relative z-10">
+        {/* Hero Section */}
+        <section className="w-full py-20 md:py-32 px-6 md:px-16 text-center">
+          <div className="max-w-4xl mx-auto">
+            <div className="exam-reveal inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-data font-bold tracking-widest uppercase mb-8">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+              {examData.badge}
+            </div>
+            <h1 className="exam-reveal font-heading font-black text-4xl md:text-6xl lg:text-7xl text-white tracking-tight mb-8 leading-tight">
+              {examData.heading}
+            </h1>
+            <p className="exam-reveal font-data text-white/80 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-12">
+              {examData.subheading}
+            </p>
+            <div className="exam-reveal flex flex-wrap justify-center gap-4">
+              <button onClick={onOpenModal} className="magnetic-button group bg-accent text-white px-10 py-5 rounded-full font-heading font-bold text-lg uppercase tracking-wide flex items-center gap-3 shadow-[0_0_20px_rgba(37,99,235,0.25)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]">
+                <span>Book Free Demo</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+              <a href="tel:+919999906710" className="group px-10 py-5 rounded-full font-heading font-bold uppercase tracking-wide flex items-center gap-3 border-2 border-white/30 text-white hover:border-accent hover:text-accent transition-all duration-300">
+                <span>Call 9999906710</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Choose Us */}
+        <section className="w-full py-20 px-6 md:px-16">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="exam-reveal font-heading font-bold text-3xl md:text-4xl text-white text-center mb-16">Why Choose Vidyashine for {examData.examName}?</h2>
+            <div className="exam-reveal grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {examData.features.map((feat, idx) => (
+                <div key={idx} className="bg-white/5 backdrop-blur-md border border-white/10 hover:border-accent/30 rounded-[2rem] p-8 transition-all duration-300 hover:-translate-y-2 group">
+                  <div className="text-3xl mb-4">{feat.icon}</div>
+                  <h3 className="font-heading font-bold text-xl text-white mb-3 group-hover:text-accent transition-colors">{feat.title}</h3>
+                  <p className="font-data text-sm text-white/70 leading-relaxed">{feat.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Syllabus Overview */}
+        <section className="w-full py-20 px-6 md:px-16" style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(7,57,128,0.3) 50%, transparent 100%)' }}>
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="exam-reveal font-heading font-bold text-3xl md:text-4xl text-white mb-8">What We Cover</h2>
+            <div className="exam-reveal grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+              {examData.syllabus.map((item, idx) => (
+                <div key={idx} className="flex items-start gap-4 bg-white/5 border border-white/10 rounded-2xl p-6">
+                  <div className="w-2 h-2 rounded-full bg-accent mt-2 shrink-0"></div>
+                  <div>
+                    <h4 className="font-heading font-bold text-white mb-1">{item.subject}</h4>
+                    <p className="font-data text-sm text-white/60">{item.topics}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="w-full py-20 px-6 md:px-16">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="exam-reveal font-heading font-bold text-3xl md:text-4xl text-white text-center mb-12">Frequently Asked Questions</h2>
+            <div className="exam-reveal space-y-4">
+              {examData.faqs.map((faq, idx) => (
+                <details key={idx} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden group">
+                  <summary className="px-8 py-5 font-heading font-bold text-white cursor-pointer hover:text-accent transition-colors list-none flex items-center justify-between">
+                    {faq.question}
+                    <ChevronRight className="w-5 h-5 text-white/40 group-open:rotate-90 transition-transform" />
+                  </summary>
+                  <div className="px-8 pb-6 font-data text-sm text-white/70 leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="w-full py-20 px-6 md:px-16 flex justify-center">
+          <div className="bg-gradient-to-r from-accent/20 to-accent/5 border border-accent/30 rounded-[3rem] p-12 md:p-16 text-center max-w-3xl w-full">
+            <h2 className="exam-reveal font-heading font-bold text-3xl md:text-4xl text-white mb-6">Start Your {examData.examName} Journey Today</h2>
+            <p className="exam-reveal font-data text-white/80 text-sm mb-10 max-w-lg mx-auto">Join hundreds of students who cracked {examData.examName} with Vidyashine. Free demo class available.</p>
+            <button onClick={onOpenModal} className="exam-reveal magnetic-button group bg-accent text-white px-10 py-5 rounded-full font-heading font-bold text-lg uppercase tracking-wide inline-flex items-center gap-3 shadow-[0_0_25px_rgba(37,99,235,0.3)]">
+              <span>Book Free Trial</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </section>
+      </div>
+    </>
+  );
+};
+
+const jeeData = {
+  title: 'Best JEE Coaching in Noida — Mains & Advanced | Vidyashine Academy',
+  metaDescription: 'Join Noida\'s top JEE coaching at Vidyashine Academy Sector 52, 34 & 61. Expert IIT faculty, small batches, 99+ percentile results. Free demo class available.',
+  path: '/jee-coaching-noida',
+  badge: 'Engineering Entrance',
+  examName: 'JEE',
+  heading: <>Best <span className="text-accent">JEE Coaching</span> in Noida</>,
+  subheading: 'Comprehensive JEE Mains & Advanced preparation with expert faculty, structured test series, and proven results. Located in Sector 52, 34 & 61, Noida.',
+  features: [
+    { icon: '🎯', title: 'Advanced Problem Solving', description: 'IIT-level problem sets with step-by-step methodology. Focus on concepts, not rote formulas.' },
+    { icon: '⚡', title: 'Speed & Accuracy Training', description: 'Timed mock tests simulating real JEE conditions. Build speed without sacrificing accuracy.' },
+    { icon: '👨‍🏫', title: 'Expert IIT Faculty', description: 'Learn from Mr. Abhishek Rana (MSc, B.Tech, B.Ed) with 12+ years of JEE coaching experience.' },
+    { icon: '📊', title: 'Weekly Diagnostic Tests', description: 'Data-driven progress tracking with detailed performance analytics for every student.' },
+    { icon: '👥', title: 'Small Batch Size (Max 25)', description: 'Personalized attention ensures no student is left behind. 1-on-1 doubt clearing sessions.' },
+    { icon: '📚', title: 'Complete Study Material', description: 'Curated PCM modules, previous year papers (2010-2026), and topic-wise practice sets included.' },
+  ],
+  syllabus: [
+    { subject: 'Physics', topics: 'Mechanics, Electrodynamics, Optics, Modern Physics, Thermodynamics, Waves' },
+    { subject: 'Chemistry (Physical)', topics: 'Atomic Structure, Thermodynamics, Equilibrium, Electrochemistry, Kinetics' },
+    { subject: 'Chemistry (Organic)', topics: 'GOC, Hydrocarbons, Oxygen & Nitrogen Compounds, Biomolecules, Polymers' },
+    { subject: 'Chemistry (Inorganic)', topics: 'Periodic Table, Coordination Chemistry, Metallurgy, p-Block & d-Block Elements' },
+    { subject: 'Mathematics', topics: 'Calculus, Algebra, Coordinate Geometry, Trigonometry, Probability & Statistics' },
+    { subject: 'Problem Solving', topics: 'Previous Year Analysis, Mock Tests, Time Management, Error Analysis' },
+  ],
+  faqs: [
+    { question: 'What is the fee for JEE coaching at Vidyashine Noida?', answer: 'JEE coaching fees at Vidyashine start from ₹75,000/year for Science Stream (PCM) and ₹95,000/year for Complete + Entrance packages. Scholarship tests available for up to 90% fee waiver.' },
+    { question: 'When do JEE batches start at Vidyashine?', answer: 'New JEE batches start in April (regular) and June (dropper batch). Limited seats available — early enrollment recommended.' },
+    { question: 'What is the batch size for JEE coaching?', answer: 'We maintain a strict maximum of 25 students per batch to ensure personalized attention and effective doubt clearing.' },
+    { question: 'Does Vidyashine offer JEE Advanced coaching?', answer: 'Yes, our JEE program covers both Mains and Advanced. Advanced-specific modules include high-order thinking problems, multi-concept questions, and IIT-pattern mock tests.' },
+    { question: 'Where is Vidyashine JEE coaching located in Noida?', answer: 'We have 3 centers: B-1 Sector 52 (Head Office), A-24 Sector 34, and Sector 61. All centers offer JEE coaching.' },
+  ],
+};
+
+const neetData = {
+  title: 'Best NEET Coaching in Noida — UG Preparation | Vidyashine Academy',
+  metaDescription: 'Top NEET coaching in Noida Sector 52, 34 & 61. Expert biology & PCM faculty, 500+ mock tests, proven results. Book your free trial at Vidyashine Academy.',
+  path: '/neet-coaching-noida',
+  badge: 'Medical Entrance',
+  examName: 'NEET',
+  heading: <>Best <span className="text-accent">NEET Coaching</span> in Noida</>,
+  subheading: 'Expert NEET UG preparation with high-retention biology drilling, concept-mapping, and PCB/PCM strategies. Noida Sector 52, 34 & 61.',
+  features: [
+    { icon: '🔬', title: 'Biology Mastery Program', description: 'NCERT-focused biology drilling with visual mnemonics, diagrams, and high-yield topic prioritization.' },
+    { icon: '⚗️', title: 'Chemistry Excellence', description: 'Physical, Organic & Inorganic chemistry taught with real-world connections and reaction mechanism mastery.' },
+    { icon: '🔢', title: 'Physics Problem Solving', description: 'Concept-first physics training with numerical problem sets designed for NEET-level application.' },
+    { icon: '📝', title: '500+ Mock Tests', description: 'NEET-pattern full syllabus tests, chapter-wise tests, and previous year paper analysis with detailed solutions.' },
+    { icon: '🧬', title: 'NCERT Inside-Out', description: 'Line-by-line NCERT analysis for Biology — the single most important resource for NEET success.' },
+    { icon: '🏆', title: 'Dropper Batch Available', description: 'Dedicated batch for repeaters with intensive revision, daily tests, and focused mentoring.' },
+  ],
+  syllabus: [
+    { subject: 'Biology (Botany)', topics: 'Plant Physiology, Genetics, Ecology, Cell Biology, Plant Morphology & Anatomy' },
+    { subject: 'Biology (Zoology)', topics: 'Human Physiology, Reproduction, Evolution, Biotechnology, Animal Kingdom' },
+    { subject: 'Physics', topics: 'Mechanics, Electrostatics, Current Electricity, Optics, Modern Physics, Waves' },
+    { subject: 'Chemistry', topics: 'Organic Reactions, Chemical Bonding, Thermodynamics, Solutions, Electrochemistry' },
+  ],
+  faqs: [
+    { question: 'What is the fee for NEET coaching at Vidyashine Noida?', answer: 'NEET coaching fees start from ₹75,000/year for Science Stream (PCB) and ₹95,000/year for Complete + Entrance packages. Scholarship tests available.' },
+    { question: 'Is NCERT enough for NEET preparation?', answer: 'NCERT is the foundation of NEET preparation and covers 90%+ of the syllabus. At Vidyashine, we do line-by-line NCERT analysis supplemented with reference materials for advanced topics.' },
+    { question: 'Does Vidyashine offer NEET dropper batches?', answer: 'Yes, our NEET Dropper Batch starts 1st June every year with an intensive 10-month program featuring daily tests, personal mentoring, and focused revision.' },
+    { question: 'What is the success rate of Vidyashine NEET students?', answer: 'Our students consistently score 600+ in NEET. We focus on quality over quantity with small batches of maximum 25 students.' },
+  ],
+};
+
+const ndaData = {
+  title: 'NDA Coaching in Noida — Foundation & Advanced | Vidyashine Academy',
+  metaDescription: 'Prepare for NDA exam at Vidyashine Academy Noida Sector 52, 34 & 61. Specialized maths, GK training for Classes 10-12. Start your free trial today.',
+  path: '/nda-coaching-noida',
+  badge: 'Defense Entrance',
+  examName: 'NDA',
+  heading: <>Best <span className="text-accent">NDA Coaching</span> in Noida</>,
+  subheading: 'Specialized NDA preparation with mathematical conditioning, general ability coverage, and tactical aptitude training in Noida.',
+  features: [
+    { icon: '🪖', title: 'Defense-Focused Training', description: 'NDA-specific curriculum covering Mathematics and General Ability Test (GAT) with military precision.' },
+    { icon: '📐', title: 'Mathematics Mastery', description: 'Advanced mathematical reasoning covering Algebra, Trigonometry, Calculus, Statistics, and Analytical Geometry.' },
+    { icon: '🌍', title: 'General Knowledge', description: 'Comprehensive GK covering History, Geography, Physics, Chemistry, Current Affairs, and Defense-specific topics.' },
+    { icon: '📝', title: 'Mock Tests & SSB Guidance', description: 'Regular NDA-pattern mock tests plus guidance for SSB interview preparation.' },
+    { icon: '🏋️', title: 'Physical Fitness Tips', description: 'Advisory on physical fitness requirements and preparation strategies for the NDA selection process.' },
+    { icon: '🎯', title: 'Foundation Course Available', description: 'NDA Foundation for Class 10 and 11 students — start early, crack it on first attempt.' },
+  ],
+  syllabus: [
+    { subject: 'Mathematics (Paper I)', topics: 'Algebra, Matrices, Trigonometry, Analytical Geometry, Differential Calculus, Integral Calculus, Statistics, Probability' },
+    { subject: 'English (GAT)', topics: 'Grammar, Vocabulary, Comprehension, Cohesion, Spotting Errors, Synonyms/Antonyms' },
+    { subject: 'General Knowledge (GAT)', topics: 'Physics, Chemistry, General Science, History, Geography, Current Events' },
+    { subject: 'SSB Preparation', topics: 'Psychological Tests, Group Testing, Personal Interview, Conference' },
+  ],
+  faqs: [
+    { question: 'When should I start NDA preparation?', answer: 'Ideally, start in Class 10 or 11 with our NDA Foundation Course. This gives you 1-2 attempts before completing Class 12.' },
+    { question: 'What is the NDA exam pattern?', answer: 'NDA exam has two papers: Mathematics (300 marks, 2.5 hours) and General Ability Test (600 marks, 2.5 hours) covering English and General Knowledge.' },
+    { question: 'Does Vidyashine provide SSB interview coaching?', answer: 'Yes, we provide guidance and mock sessions for the SSB interview process as part of our NDA program.' },
+    { question: 'What are the fees for NDA coaching?', answer: 'NDA coaching is included in our competitive exam packages. Contact us at 9999906710 for specific fee details and scholarship test information.' },
+  ],
+};
+
+const cuetData = {
+  title: 'CUET Coaching in Noida — University Entrance Prep | Vidyashine Academy',
+  metaDescription: 'Expert CUET preparation at Vidyashine Academy Noida. Domain subjects, general aptitude, and top university admission counseling. Enroll now!',
+  path: '/cuet-coaching-noida',
+  badge: 'University Entrance',
+  examName: 'CUET',
+  heading: <>Best <span className="text-accent">CUET Coaching</span> in Noida</>,
+  subheading: 'Strategic CUET preparation with domain-subject mastery, general aptitude benchmarks, and premier university admission counseling in Noida.',
+  features: [
+    { icon: '🎓', title: 'Domain Subject Mastery', description: 'In-depth preparation for your chosen CUET domain subjects with university-specific focus.' },
+    { icon: '📖', title: 'General Aptitude Training', description: 'Quantitative aptitude, logical reasoning, and general awareness preparation for Section I & III.' },
+    { icon: '✍️', title: 'Language Proficiency', description: 'English and Hindi language sections covered with reading comprehension and grammar mastery.' },
+    { icon: '🏛️', title: 'University Counseling', description: 'Expert guidance on university selection, cutoff analysis, and application strategy for DU, JNU, BHU, and more.' },
+    { icon: '📊', title: 'Mock Test Series', description: 'CUET-pattern mock tests with detailed analysis, time management strategies, and performance tracking.' },
+    { icon: '⏱️', title: '60-Day Crash Course', description: 'Intensive short-term program for last-minute preparation with focused revision and daily tests.' },
+  ],
+  syllabus: [
+    { subject: 'Section IA (Language)', topics: 'English Reading Comprehension, Grammar, Vocabulary, Verbal Ability' },
+    { subject: 'Section II (Domain)', topics: 'Subject-specific preparation — Sciences, Commerce, Humanities, or Vocational Subjects' },
+    { subject: 'Section III (General Test)', topics: 'General Knowledge, Current Affairs, Quantitative Reasoning, Logical Reasoning, Data Interpretation' },
+    { subject: 'University Strategy', topics: 'Cutoff Analysis, Preference Filling, Application Guidance for Central Universities' },
+  ],
+  faqs: [
+    { question: 'What is CUET and why is it important?', answer: 'CUET (Common University Entrance Test) is mandatory for admission to 45+ central universities including DU, JNU, BHU, and Jamia. Your CUET score determines your university placement.' },
+    { question: 'When does CUET 2026 exam take place?', answer: 'CUET is typically conducted in May-June. Our preparation batches start in December for a full 6-month program, and crash courses are available from March.' },
+    { question: 'Can I prepare for CUET alongside Class 12 boards?', answer: 'Absolutely. At Vidyashine, our integrated Board + CUET program covers both simultaneously since 80%+ of the CUET syllabus overlaps with Class 12 boards.' },
+    { question: 'What are the fees for CUET coaching?', answer: 'CUET coaching is part of our Class 12 Complete + Entrance package at ₹1,10,000/year. Standalone CUET crash course details available on inquiry.' },
+  ],
+};
+
+const JEECoachingPage = ({ onOpenModal }) => <ExamPageLayout examData={jeeData} onOpenModal={onOpenModal} />;
+const NEETCoachingPage = ({ onOpenModal }) => <ExamPageLayout examData={neetData} onOpenModal={onOpenModal} />;
+const NDACoachingPage = ({ onOpenModal }) => <ExamPageLayout examData={ndaData} onOpenModal={onOpenModal} />;
+const CUETCoachingPage = ({ onOpenModal }) => <ExamPageLayout examData={cuetData} onOpenModal={onOpenModal} />;
+
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
@@ -2886,6 +3226,7 @@ const App = () => {
     <BrowserRouter>
       <ScrollToTop />
       <div className="relative w-full min-h-screen bg-background text-primary flex flex-col">
+        <WhatsAppButton />
         <BookingModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         <CancellationModal isOpen={isCancelModalOpen} onClose={() => setIsCancelModalOpen(false)} />
 
@@ -2898,6 +3239,7 @@ const App = () => {
           </svg>
         </div>
 
+        <AnnouncementBar />
         <Navbar onOpenModal={() => setIsModalOpen(true)} onOpenCancelModal={() => setIsCancelModalOpen(true)} />
 
         <main className="flex-grow w-full flex flex-col">
@@ -2909,6 +3251,10 @@ const App = () => {
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogArticle />} />
             <Route path="/toppers" element={<ToppersPage />} />
+            <Route path="/jee-coaching-noida" element={<JEECoachingPage onOpenModal={() => setIsModalOpen(true)} />} />
+            <Route path="/neet-coaching-noida" element={<NEETCoachingPage onOpenModal={() => setIsModalOpen(true)} />} />
+            <Route path="/nda-coaching-noida" element={<NDACoachingPage onOpenModal={() => setIsModalOpen(true)} />} />
+            <Route path="/cuet-coaching-noida" element={<CUETCoachingPage onOpenModal={() => setIsModalOpen(true)} />} />
             {/* Placeholder routes for the rest to keep nav working */}
             <Route path="/about-us" element={<AboutUsPage />} />
             <Route path="/reach-us" element={<ReachUsPage />} />
